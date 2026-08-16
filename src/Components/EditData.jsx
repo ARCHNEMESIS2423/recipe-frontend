@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-import WoodenBoard from '../assets/WoodenBoard.jpg'
+import WoodenBoard from '../assets/WoodenBoard.webp'
 import { useEffect, useState } from 'react'
 function EditData({isCalled,formVals,recall,recallData,network}){
 

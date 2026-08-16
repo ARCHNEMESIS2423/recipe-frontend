@@ -1,4 +1,4 @@
-import heroImage from"./assets/kitchenBackground.jpg"
+import heroImage from"./assets/kitchenBackground.webp"
 import Recipes from "./Components/Recipes.jsx"
 import Header from "./Components/Header.jsx"
 import AddRecipe from "./Components/AddRecipe.jsx"
@@ -7,7 +7,7 @@ import axios from "axios"
 function App() {
     const [info,setInfo] = useState([])
 
-    const uRlConnection = useRef("http://127.0.0.1:8000/api/")
+    const uRlConnection = useRef("http://192.168.1.3:8090/api/")
    
      async function fetch_data(){
           const response = await axios.get(uRlConnection.current+'recipes')

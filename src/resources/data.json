@@ -1,32 +1,3 @@
 {
-"a":{
-  "name":"john",
-   "age":23,
-   "is_married":false,
-   "is_employed":false
-},
-"b":{
-  "name":"ima",
-   "age":25,
-   "is_married":true,
-   "is_employed":true
-},
-"c":{
-  "name":"Asha",
-   "age":21,
-   "is_married":false,
-   "is_employed":false
-},
-"d":{
-  "name":"gabriel",
-   "age":24,
-   "is_married":false,
-   "is_employed":true
-},
-"e":{
-  "name":"gaby",
-   "age":24,
-   "is_married":false,
-   "is_employed":false
-}
+
 }

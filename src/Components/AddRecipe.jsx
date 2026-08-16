@@ -1,45 +1,57 @@
 import axios from "axios"
 import Recipes from "./Recipes"
 import { useEffect,useState } from "react"
+
 function AddRecipe({url,reloadData}){
-    var [submited,isSubmited] =useState(false)
+    let [submited,isSubmited] =useState(false)
+    let [response,setResponse] = useState("")
+    let [error,setError] = useState(false)
 
     async function submitRecipes(e){
-        isSubmited(true)
-         e.preventDefault()
-         const formData = new FormData(e.target)
-         
-         try{
-         const data = await axios.post(url+"saveRecipe",{
-            title:formData.get('title'),
-            ingredients:formData.get('ingredients'),
-            cook_time:Number(formData.get('cooking_time'))
-         })
-         await reloadData(data)
-         e.target.reset()
-         e.target.disabled = true
-         
+        e.preventDefault()
+        const formData = new FormData(e.target)
 
-         
-         setTimeout(()=>isSubmited(false),3000)
-          
+        if(!(formData.get('title') && formData.get('ingredients') && formData.get('cooking_time'))){ 
+            isSubmited(true)
+            setError(true)
+            setResponse("Fill in all the fields")
+            setTimeout(()=>isSubmited(false),3000)
+            e.target.disabled = false  
+
+            return 1;
+        }   
+        try{
+            e.target.disabled = true
+            const data = await axios.post(url+"saveRecipe",{
+                title:formData.get('title'),
+                ingredients:formData.get('ingredients'),
+                cook_time:Number(formData.get('cooking_time'))
+            })
+            await reloadData(data)
+            e.target.reset()
+            
+            setError(false)
+            isSubmited(true)
+            setResponse("New Recipe has been added succesfully ✅")
+            setTimeout(()=>isSubmited(false),3000)
+            e.target.disabled = false   
         }catch(error){
-
-             console.log(error)
-
-         }
+            isSubmited(true)
+            setError(true)
+            setResponse("Something went wrong!, Recipe is not Added")
+            setTimeout(()=>isSubmited(false),3000)
+            e.target.disabled = false  
+        }
+        
     }
     
 
     return (
-        <form onSubmit={(e)=>submitRecipes(e)} className="w-[70%] ml-auto mr-auto bg-white rounded mt-10 flex flex-col">
-        {
-        submited &&<p className="bg-green-800 p-4 rounded-tl rounded-tr mt-0 transition-all">
-         New Recipe is succesfully added ☑️
+        <form onSubmit={(e)=>submitRecipes(e)} className="w-[70%] ml-auto mr-auto bg-white rounded mt-10 flex flex-col relative">
+        
+        <p className={`${error?"bg-red-800":"bg-green-800"} p-4 rounded-tl rounded-tr mt-0 transition-all duration-300 absolute top-0 self-center font-black text-xl w-full ${submited?"opacity-100":"opacity-0"}`}>
+         { response }
         </p>
-        
-        
-        }
             <h2 className="self-center font-bold text-blue-800 m-2">ADD NEW FOOD RECIPE</h2>
           <fieldset disabled={submited}>
             <div className="flex flex-col m-2">

@@ -1,5 +1,5 @@
 import { useState,useEffect } from 'react'
-import woodBoard from '../assets/WoodenBoard.jpg'
+import woodBoard from '../assets/WoodenBoard.webp'
 import EditData from './EditData'
 import axios from 'axios'
 
@@ -44,7 +44,7 @@ useEffect(() => { getData() }, [])
 
          data.data.map(({id, title, ingredients, cook_time},count)=>(
 
-         <div id="kitchen-wood-board" className='flex flex-row w-[90%] mt-10 p-2 ml-auto mr-auto mt-4 outline-3 outline-yellow-700/50 border-3 border-yellow-900/50 rounded bg-yellow-800' style={{backgroundImage:`url(${woodBoard})`}}> 
+         <div id="kitchen-wood-board" className='flex flex-row w-[90%] mt-10 p-2 ml-auto mr-auto outline-3 outline-yellow-700/50 border-3 border-yellow-900/50 rounded bg-yellow-800' style={{backgroundImage:`url(${woodBoard})`}}> 
 
               <div id="item-description" className={`backdrop-blur filter w-[90%] min-h-10 mt-2 rounded ml-auto mr-auto`} key={id}>
 
@@ -58,11 +58,11 @@ useEffect(() => { getData() }, [])
                     <ol className='list'>
                       {ingredients.split(',').map((e,index)=>
                       <li className='p-1 hover:text-white font-["Open_Sans"] pl-3 flex flex-row justify-between' key={id +'|'+ index}>
-                        🛞  {e}
+                        ➜  {e}
                       </li>)}
                     </ol>
 
-                    <div id="options" className='flex flex-row m-1 gap-1 bg-white w-full rounded-bl rounded-br mt-10 text-[150%] text-center hover:bg-white/80 transition duration-[0.3s] active:bg-white/50 cursor-pointer p-3'>
+                    <div id="options" className='flex flex-row m-1 gap-1 bg-white w-full rounded-bl rounded-br mt-10 text-[150%] text-center hover:bg-white/80 transition duration-300 active:bg-white/50 cursor-pointer p-3'>
 
                         <button className='w-full bg-[hsl(100,90%,50%)] p-[0.2px] rounded font-semi-bold hover:bg-[hsl(100,90%,40%)] active:bg-[hsl(100,90%,40%)] cursor-pointer' onClick={()=>popupForm(id)}>
                           EDIT ✂️
